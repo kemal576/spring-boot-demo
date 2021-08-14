@@ -2,6 +2,7 @@ package com.sahinkemal.sbDemo.Service;
 
 import com.sahinkemal.sbDemo.DataAccess.ICityDal;
 import com.sahinkemal.sbDemo.Entities.City;
+import com.sahinkemal.sbDemo.Entities.County;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,11 @@ public class CityManager implements ICityService{
     @Transactional
     public List<City> GetAll() {
         return this.cityDal.GetAll();
+    }
+
+    @Override
+    public List<County> GetAllCounties() {
+        return this.cityDal.GetAllCounties();
     }
 
     @Override

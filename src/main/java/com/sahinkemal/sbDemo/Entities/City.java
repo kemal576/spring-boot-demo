@@ -1,32 +1,45 @@
 package com.sahinkemal.sbDemo.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="city")
 public class City {
     @Id
-    @Column(name = "ID")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "Name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "countrycode")
-    private String countryCode;
+    @Column(name = "population")
+    private int population;
 
-    @Column(name = "District")
+    @Column(name = "district")
     private String district;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "city")
+    Set<County> counties = new HashSet<>();
+
+///////////////////////////////////////////////////////////////////////
 
     public City(){}
 
-    public City(int id, String name, String countryCode, String district) {
+    public City(int id, String name, int population, String district) {
         this.id = id;
         this.name = name;
-        this.countryCode = countryCode;
+        this.population = population;
         this.district = district;
     }
+
+    ///////////////////////////////////////////////////////////////////////
 
     public int getId() {
         return id;
@@ -44,20 +57,24 @@ public class City {
         this.name = name;
     }
 
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
-    }
-
     public String getDistrict() {
         return district;
     }
 
     public void setDistrict(String district) {
         this.district = district;
+    }
+
+    public int getPopulation() {
+        return population;
+    }
+
+    public void setPopulation(int population) {
+        this.population = population;
+    }
+
+    public Set<County> getCounties() {
+        return counties;
     }
 }
 
